@@ -50,3 +50,18 @@ h1 {
     border-right: 25px solid transparent;
     border-bottom: 40px solid #666;
 }
+
+.weight-object {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #e74c3c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    transform: translateX(-50%);
+}
