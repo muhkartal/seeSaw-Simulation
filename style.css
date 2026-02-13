@@ -37,12 +37,12 @@ h1 {
     top: 130px;
     left: 25px;
     border-radius: 4px;
-    transform-origin: 0 0;
+    transform-origin: center center;
 }
 
 .seesaw-fulcrum {
     position: absolute;
-    top: 146px;
+    top: 138px;    /* plank top(130) + height(16)/2 = 138 */
     left: 50%;
     transform: translateX(-50%);
     width: 0;
