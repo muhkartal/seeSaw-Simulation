@@ -47,5 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Left torque:', leftTorque);
         console.log('Right torque:', rightTorque);
         console.log('Calculated angle:', angle);
+
+        plank.style.transform = 'rotate(' + angle + 'deg)';
     });
 });
