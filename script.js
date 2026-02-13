@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     var plank = document.getElementById('plank');
-    var container = document.querySelector('.sesaw-container');
+    var container = document.querySelector('.seesaw-container');
     var objects = [];
 
     plank.addEventListener('click', function(e) {

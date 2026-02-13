@@ -22,14 +22,14 @@ h1 {
     color: #333;
 }
 
-.sesaw-container {
+.seesaw-container {
     position: relative;
     width: 650px;
     height: 300px;
     margin: 0 auto;
 }
 
-.sesaw-plank {
+.seesaw-plank {
     position: absolute;
     width: 600px;
     height: 16px;
@@ -39,7 +39,7 @@ h1 {
     border-radius: 4px;
 }
 
-.sesaw-fulcrum {
+.seesaw-fulcrum {
     position: absolute;
     top: 146px;
     left: 50%;
