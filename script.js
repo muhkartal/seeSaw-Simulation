@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var distanceFromCenter = clickX - plankCenter;
 
         if (Math.abs(distanceFromCenter) < 10) return;
+        if (clickX < 5 || clickX > plank.offsetWidth - 5) return;
 
         var weight = Math.floor(Math.random() * 10) + 1;
 
