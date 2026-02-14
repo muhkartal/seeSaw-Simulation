@@ -36,13 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
         var angle = Math.max(-30, Math.min(30, (rightTorque - leftTorque) / 10));
         plank.style.transform = 'rotate(' + angle + 'deg)';
 
-        console.log('=== Seesaw Debug ===');
-        console.log('Objects count:', objects.length);
-        console.log('Left torque:', leftTorque.toFixed(2));
-        console.log('Right torque:', rightTorque.toFixed(2));
-        console.log('Tilt angle:', angle.toFixed(2) + '°');
-        console.log('====================');
-
         // Update weight display
         var leftTotal = 0, rightTotal = 0;
         for (var i = 0; i < objects.length; i++) {
@@ -75,9 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
         el.textContent = weight;
         plank.appendChild(el);
 
-        console.log('Object added:', obj);
-        console.log('Total objects:', objects.length);
-
         // Calculate torque
         var leftTorque = 0;
         var rightTorque = 0;
@@ -93,13 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         var angle = Math.max(-30, Math.min(30, (rightTorque - leftTorque) / 10));
-
-        console.log('=== Seesaw Debug ===');
-        console.log('Objects count:', objects.length);
-        console.log('Left torque:', leftTorque.toFixed(2));
-        console.log('Right torque:', rightTorque.toFixed(2));
-        console.log('Tilt angle:', angle.toFixed(2) + '°');
-        console.log('====================');
 
         // Update weight display
         var leftTotal = 0;
