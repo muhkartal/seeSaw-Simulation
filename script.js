@@ -116,4 +116,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         plank.style.transform = 'rotate(' + angle + 'deg)';
     });
+
+    document.getElementById('resetBtn').addEventListener('click', function() {
+        objects = [];
+
+        var weightObjects = plank.querySelectorAll('.weight-object');
+        for (var i = 0; i < weightObjects.length; i++) {
+            weightObjects[i].remove();
+        }
+
+        plank.style.transform = 'rotate(0deg)';
+        document.getElementById('leftWeight').textContent = 'Left: 0 kg';
+        document.getElementById('rightWeight').textContent = 'Right: 0 kg';
+    });
 });
