@@ -38,6 +38,7 @@ h1 {
     left: 25px;
     border-radius: 4px;
     transform-origin: center center;
+    transition: transform 0.8s ease-out;
 }
 
 .seesaw-fulcrum {
