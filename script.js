@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     var plank = document.getElementById('plank');
-    var container = document.querySelector('.seesaw-container');
     var objects = [];
 
     plank.addEventListener('click', function(e) {
@@ -20,10 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var el = document.createElement('div');
         el.className = 'weight-object';
-        el.style.left = (clickX + 25) + 'px';
-        el.style.top = '100px';
+        el.style.left = clickX + 'px';
         el.textContent = weight;
-        container.appendChild(el);
+        plank.appendChild(el);
 
         console.log('Object added:', obj);
         console.log('Total objects:', objects.length);
