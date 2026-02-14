@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             clickX: clickX
         };
         objects.push(obj);
+        localStorage.setItem('seesawObjects', JSON.stringify(objects));
 
         var el = document.createElement('div');
         el.className = 'weight-object';
