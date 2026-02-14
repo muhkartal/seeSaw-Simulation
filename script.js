@@ -2,6 +2,50 @@ document.addEventListener('DOMContentLoaded', function() {
     var plank = document.getElementById('plank');
     var objects = [];
 
+    // Load saved state
+    var saved = localStorage.getItem('seesawObjects');
+    if (saved) {
+        try {
+            objects = JSON.parse(saved);
+        } catch (e) {
+            objects = [];
+            localStorage.removeItem('seesawObjects');
+        }
+
+        // Render saved objects
+        for (var i = 0; i < objects.length; i++) {
+            var el = document.createElement('div');
+            el.className = 'weight-object';
+            el.style.left = objects[i].clickX + 'px';
+            el.textContent = objects[i].weight;
+            plank.appendChild(el);
+        }
+
+        // Recalculate tilt
+        var leftTorque = 0;
+        var rightTorque = 0;
+        var halfPlank = plank.offsetWidth / 2;
+        for (var i = 0; i < objects.length; i++) {
+            var normalizedDist = Math.abs(objects[i].position) / halfPlank * 10;
+            if (objects[i].position < 0) {
+                leftTorque += objects[i].weight * normalizedDist;
+            } else {
+                rightTorque += objects[i].weight * normalizedDist;
+            }
+        }
+        var angle = Math.max(-30, Math.min(30, (rightTorque - leftTorque) / 10));
+        plank.style.transform = 'rotate(' + angle + 'deg)';
+
+        // Update weight display
+        var leftTotal = 0, rightTotal = 0;
+        for (var i = 0; i < objects.length; i++) {
+            if (objects[i].position < 0) leftTotal += objects[i].weight;
+            else rightTotal += objects[i].weight;
+        }
+        document.getElementById('leftWeight').textContent = 'Left: ' + leftTotal + ' kg';
+        document.getElementById('rightWeight').textContent = 'Right: ' + rightTotal + ' kg';
+    }
+
     plank.addEventListener('click', function(e) {
         var clickX = e.offsetX;
         var plankCenter = plank.offsetWidth / 2;
