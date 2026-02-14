@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('resetBtn').addEventListener('click', function() {
         objects = [];
+        localStorage.removeItem('seesawObjects');
 
         var weightObjects = plank.querySelectorAll('.weight-object');
         for (var i = 0; i < weightObjects.length; i++) {
