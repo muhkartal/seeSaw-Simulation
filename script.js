@@ -46,6 +46,19 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Right torque:', rightTorque);
         console.log('Calculated angle:', angle);
 
+        // Update weight display
+        var leftTotal = 0;
+        var rightTotal = 0;
+        for (var i = 0; i < objects.length; i++) {
+            if (objects[i].position < 0) {
+                leftTotal += objects[i].weight;
+            } else {
+                rightTotal += objects[i].weight;
+            }
+        }
+        document.getElementById('leftWeight').textContent = 'Left: ' + leftTotal + ' kg';
+        document.getElementById('rightWeight').textContent = 'Right: ' + rightTotal + ' kg';
+
         plank.style.transform = 'rotate(' + angle + 'deg)';
     });
 });
