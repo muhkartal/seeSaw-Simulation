@@ -17,6 +17,13 @@ document.addEventListener('DOMContentLoaded', function() {
             var el = document.createElement('div');
             el.className = 'weight-object';
             el.style.left = objects[i].clickX + 'px';
+            // Size based on weight
+            var size = 20 + objects[i].weight * 3;
+            el.style.width = size + 'px';
+            el.style.height = size + 'px';
+            // Color: green(light) → red(heavy)
+            var hue = ((objects[i].weight - 1) / 9) * 120;
+            el.style.backgroundColor = 'hsl(' + (120 - hue) + ', 70%, 45%)';
             var label = document.createElement('span');
             label.className = 'weight-label';
             label.textContent = objects[i].weight + 'kg';
@@ -71,6 +78,13 @@ document.addEventListener('DOMContentLoaded', function() {
         var el = document.createElement('div');
         el.className = 'weight-object';
         el.style.left = clickX + 'px';
+        // Size based on weight
+        var size = 20 + obj.weight * 3;
+        el.style.width = size + 'px';
+        el.style.height = size + 'px';
+        // Color: green(light) → red(heavy)
+        var hue = ((obj.weight - 1) / 9) * 120;
+        el.style.backgroundColor = 'hsl(' + (120 - hue) + ', 70%, 45%)';
         var label = document.createElement('span');
         label.className = 'weight-label';
         label.textContent = obj.weight + 'kg';
