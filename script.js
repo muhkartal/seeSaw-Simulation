@@ -17,7 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
             var el = document.createElement('div');
             el.className = 'weight-object';
             el.style.left = objects[i].clickX + 'px';
-            el.textContent = objects[i].weight;
+            var label = document.createElement('span');
+            label.className = 'weight-label';
+            label.textContent = objects[i].weight + 'kg';
+            el.appendChild(label);
             plank.appendChild(el);
         }
 
@@ -67,7 +70,10 @@ document.addEventListener('DOMContentLoaded', function() {
         var el = document.createElement('div');
         el.className = 'weight-object';
         el.style.left = clickX + 'px';
-        el.textContent = weight;
+        var label = document.createElement('span');
+        label.className = 'weight-label';
+        label.textContent = obj.weight + 'kg';
+        el.appendChild(label);
         plank.appendChild(el);
 
         // Calculate torque
