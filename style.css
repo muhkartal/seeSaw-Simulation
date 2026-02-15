@@ -41,14 +41,14 @@ h1 {
 
 .seesaw-container {
     position: relative;
-    width: 650px;
+    width: 750px;
     height: 300px;
     margin: 0 auto;
 }
 
 .seesaw-plank {
     position: absolute;
-    width: 600px;
+    width: 700px;
     height: 16px;
     background-color: #8B4513;
     top: 130px;
@@ -151,7 +151,7 @@ h1 {
     animation: dropIn 0.5s ease-out forwards;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
     .seesaw-container {
         transform: scale(0.7);
         transform-origin: top center;

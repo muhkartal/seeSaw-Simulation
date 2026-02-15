@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var objects = [];
 
     // Configuration constants
-    var PLANK_WIDTH = 600;
+    var PLANK_WIDTH = 700;
     var MAX_TILT_ANGLE = 30;
     var TORQUE_SENSITIVITY = 10;
     var MIN_WEIGHT = 1;
