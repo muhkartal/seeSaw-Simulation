@@ -130,6 +130,27 @@ h1 {
     pointer-events: none;
 }
 
+@keyframes dropIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-60px);
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(5px);
+    }
+    80% {
+        transform: translateX(-50%) translateY(-3px);
+    }
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.drop-animation {
+    animation: dropIn 0.5s ease-out forwards;
+}
+
 @media (max-width: 700px) {
     .seesaw-container {
         transform: scale(0.7);
