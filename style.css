@@ -129,3 +129,36 @@ h1 {
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
     pointer-events: none;
 }
+
+@media (max-width: 700px) {
+    .seesaw-container {
+        transform: scale(0.7);
+        transform-origin: top center;
+    }
+
+    .weight-display {
+        width: 300px;
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .seesaw-container {
+        transform: scale(0.5);
+        transform-origin: top center;
+    }
+
+    .weight-display {
+        width: 250px;
+        font-size: 12px;
+    }
+
+    h1 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+}
