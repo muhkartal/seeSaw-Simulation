@@ -41,6 +41,40 @@ document.addEventListener('DOMContentLoaded', function() {
         updateWeightDisplay();
     }
 
+    function renderObject(obj, animate) {
+        var el = document.createElement('div');
+        el.className = 'weight-object';
+        el.style.left = obj.clickX + 'px';
+
+        var size = 20 + obj.weight * 3;
+        el.style.width = size + 'px';
+        el.style.height = size + 'px';
+
+        var hue = ((obj.weight - 1) / 9) * 120;
+        el.style.backgroundColor = 'hsl(' + (120 - hue) + ', 70%, 45%)';
+
+        var label = document.createElement('span');
+        label.className = 'weight-label';
+        label.textContent = obj.weight + 'kg';
+        el.appendChild(label);
+
+        if (animate) {
+            el.classList.add('drop-animation');
+        }
+
+        plank.appendChild(el);
+    }
+
+    function renderAllObjects() {
+        var existing = plank.querySelectorAll('.weight-object');
+        for (var i = 0; i < existing.length; i++) {
+            existing[i].remove();
+        }
+        for (var i = 0; i < objects.length; i++) {
+            renderObject(objects[i], false);
+        }
+    }
+
     function saveState() {
         localStorage.setItem('seesawObjects', JSON.stringify(objects));
     }
@@ -57,28 +91,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Load saved state
+    // Load saved state and render
     loadState();
-
-    // Render saved objects
-    for (var i = 0; i < objects.length; i++) {
-        var el = document.createElement('div');
-        el.className = 'weight-object';
-        el.style.left = objects[i].clickX + 'px';
-        // Size based on weight
-        var size = 20 + objects[i].weight * 3;
-        el.style.width = size + 'px';
-        el.style.height = size + 'px';
-        // Color: green(light) → red(heavy)
-        var hue = ((objects[i].weight - 1) / 9) * 120;
-        el.style.backgroundColor = 'hsl(' + (120 - hue) + ', 70%, 45%)';
-        var label = document.createElement('span');
-        label.className = 'weight-label';
-        label.textContent = objects[i].weight + 'kg';
-        el.appendChild(label);
-        plank.appendChild(el);
-    }
-
+    renderAllObjects();
     updateSeesaw();
 
     plank.addEventListener('click', function(e) {
@@ -98,23 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
             clickX: clickX
         };
         objects.push(obj);
-
-        var el = document.createElement('div');
-        el.className = 'weight-object';
-        el.style.left = clickX + 'px';
-        // Size based on weight
-        var size = 20 + obj.weight * 3;
-        el.style.width = size + 'px';
-        el.style.height = size + 'px';
-        // Color: green(light) → red(heavy)
-        var hue = ((obj.weight - 1) / 9) * 120;
-        el.style.backgroundColor = 'hsl(' + (120 - hue) + ', 70%, 45%)';
-        var label = document.createElement('span');
-        label.className = 'weight-label';
-        label.textContent = obj.weight + 'kg';
-        el.appendChild(label);
-        plank.appendChild(el);
-
+        renderObject(obj, true);
         updateSeesaw();
         saveState();
     });
@@ -122,10 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('resetBtn').addEventListener('click', function() {
         objects = [];
         localStorage.removeItem('seesawObjects');
-        var weightObjects = plank.querySelectorAll('.weight-object');
-        for (var i = 0; i < weightObjects.length; i++) {
-            weightObjects[i].remove();
-        }
+        renderAllObjects();
         updateSeesaw();
     });
 });
