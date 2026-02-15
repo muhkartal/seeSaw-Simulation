@@ -4,7 +4,7 @@ A physics-based seesaw simulation built with pure JavaScript, HTML, and CSS.
 
 ## Live Demo
 
-[View Demo](https://muhkartal.github.io/seeSaw-Simulation/)
+[View Demo](https://muhkartal.github.io/muhammed-ibrahim-kartal-seesaw-simulation/)
 
 ## How It Works
 
