@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var plank = document.getElementById('plank');
     var objects = [];
 
+    // Configuration constants
     var PLANK_WIDTH = 600;
     var MAX_TILT_ANGLE = 30;
     var TORQUE_SENSITIVITY = 10;
@@ -10,6 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var PIVOT_DEAD_ZONE = 10;
     var EDGE_MARGIN = 5;
 
+    /**
+     * Calculate the torque (turning force) for each side of the seesaw.
+     * Torque = weight × normalized distance from pivot.
+     * Distance is normalized to a 0-10 scale where 10 = edge of plank.
+     */
     function calculateTorque() {
         var leftTorque = 0;
         var rightTorque = 0;
@@ -27,10 +33,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return { leftTorque: leftTorque, rightTorque: rightTorque };
     }
 
+    /**
+     * Calculate the tilt angle based on torque difference.
+     * Positive angle = tilts right down, Negative = tilts left down.
+     * Clamped to ±MAX_TILT_ANGLE degrees.
+     */
     function calculateAngle(leftTorque, rightTorque) {
         return Math.max(-MAX_TILT_ANGLE, Math.min(MAX_TILT_ANGLE, (rightTorque - leftTorque) / TORQUE_SENSITIVITY));
     }
 
+    /** Update the weight display showing total weight on each side */
     function updateWeightDisplay() {
         var leftTotal = 0;
         var rightTotal = 0;
@@ -42,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('rightWeight').textContent = 'Right: ' + rightTotal + ' kg';
     }
 
+    /** Recalculate torque, apply rotation to plank, and update weight display */
     function updateSeesaw() {
         var torques = calculateTorque();
         var angle = calculateAngle(torques.leftTorque, torques.rightTorque);
@@ -49,6 +62,12 @@ document.addEventListener('DOMContentLoaded', function() {
         updateWeightDisplay();
     }
 
+    /**
+     * Render a single weight object on the plank.
+     * Size and color vary based on weight value.
+     * @param {Object} obj - The weight object data
+     * @param {boolean} animate - Whether to play drop animation
+     */
     function renderObject(obj, animate) {
         var el = document.createElement('div');
         el.className = 'weight-object';
@@ -73,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         plank.appendChild(el);
     }
 
+    /** Clear all rendered objects and re-render from the objects array */
     function renderAllObjects() {
         var existing = plank.querySelectorAll('.weight-object');
         for (var i = 0; i < existing.length; i++) {
@@ -83,10 +103,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    /** Save current objects state to localStorage */
     function saveState() {
         localStorage.setItem('seesawObjects', JSON.stringify(objects));
     }
 
+    /** Load objects state from localStorage with error handling */
     function loadState() {
         var saved = localStorage.getItem('seesawObjects');
         if (saved) {
@@ -99,17 +121,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Load saved state and render
+    // Initialize: load persisted state and render on page load
     loadState();
     renderAllObjects();
     updateSeesaw();
 
+    // Handle click on seesaw plank to drop a new weight object
     plank.addEventListener('click', function(e) {
         var clickX = e.offsetX;
         var plankCenter = PLANK_WIDTH / 2;
         var distanceFromCenter = clickX - plankCenter;
 
+        // Ignore clicks too close to the pivot point
         if (Math.abs(distanceFromCenter) < PIVOT_DEAD_ZONE) return;
+        // Ignore clicks at the very edge of the plank
         if (clickX < EDGE_MARGIN || clickX > PLANK_WIDTH - EDGE_MARGIN) return;
 
         var weight = Math.floor(Math.random() * (MAX_WEIGHT - MIN_WEIGHT + 1)) + MIN_WEIGHT;
@@ -126,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
         saveState();
     });
 
+    // Handle reset button click to clear all objects
     document.getElementById('resetBtn').addEventListener('click', function() {
         objects = [];
         localStorage.removeItem('seesawObjects');
