@@ -22,6 +22,12 @@ h1 {
     color: #333;
 }
 
+.subtitle {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
 .weight-display {
     display: flex;
     justify-content: space-between;
@@ -29,6 +35,10 @@ h1 {
     margin: 0 auto 30px;
     font-size: 18px;
     font-weight: bold;
+    background: rgba(255,255,255,0.8);
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 #leftWeight {
