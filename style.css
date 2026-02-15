@@ -134,6 +134,8 @@ h1 {
     .seesaw-container {
         transform: scale(0.7);
         transform-origin: top center;
+        margin-top: -30px;
+        margin-bottom: -50px;
     }
 
     .weight-display {
@@ -150,6 +152,8 @@ h1 {
     .seesaw-container {
         transform: scale(0.5);
         transform-origin: top center;
+        margin-top: -50px;
+        margin-bottom: -80px;
     }
 
     .weight-display {
@@ -160,5 +164,9 @@ h1 {
     h1 {
         font-size: 20px;
         margin-bottom: 20px;
+    }
+
+    .controls {
+        margin-top: 10px;
     }
 }
