@@ -2,10 +2,18 @@ document.addEventListener('DOMContentLoaded', function() {
     var plank = document.getElementById('plank');
     var objects = [];
 
+    var PLANK_WIDTH = 600;
+    var MAX_TILT_ANGLE = 30;
+    var TORQUE_SENSITIVITY = 10;
+    var MIN_WEIGHT = 1;
+    var MAX_WEIGHT = 10;
+    var PIVOT_DEAD_ZONE = 10;
+    var EDGE_MARGIN = 5;
+
     function calculateTorque() {
         var leftTorque = 0;
         var rightTorque = 0;
-        var halfPlank = plank.offsetWidth / 2;
+        var halfPlank = PLANK_WIDTH / 2;
 
         for (var i = 0; i < objects.length; i++) {
             var normalizedDist = Math.abs(objects[i].position) / halfPlank * 10;
@@ -20,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function calculateAngle(leftTorque, rightTorque) {
-        return Math.max(-30, Math.min(30, (rightTorque - leftTorque) / 10));
+        return Math.max(-MAX_TILT_ANGLE, Math.min(MAX_TILT_ANGLE, (rightTorque - leftTorque) / TORQUE_SENSITIVITY));
     }
 
     function updateWeightDisplay() {
@@ -98,13 +106,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     plank.addEventListener('click', function(e) {
         var clickX = e.offsetX;
-        var plankCenter = plank.offsetWidth / 2;
+        var plankCenter = PLANK_WIDTH / 2;
         var distanceFromCenter = clickX - plankCenter;
 
-        if (Math.abs(distanceFromCenter) < 10) return;
-        if (clickX < 5 || clickX > plank.offsetWidth - 5) return;
+        if (Math.abs(distanceFromCenter) < PIVOT_DEAD_ZONE) return;
+        if (clickX < EDGE_MARGIN || clickX > PLANK_WIDTH - EDGE_MARGIN) return;
 
-        var weight = Math.floor(Math.random() * 10) + 1;
+        var weight = Math.floor(Math.random() * (MAX_WEIGHT - MIN_WEIGHT + 1)) + MIN_WEIGHT;
 
         var obj = {
             id: Date.now(),
